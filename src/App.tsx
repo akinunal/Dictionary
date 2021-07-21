@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { observer } from 'mobx-react-lite';
+import styled from '@emotion/styled';
+import DictionaryContainer from './components/DictionaryContainer/DictionaryContainer';
+import Form from './components/Form/Form';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+interface AppProps {
+  store: any
 }
+
+const App = observer(({ store }: AppProps) => {
+  return (
+    <StyledDiv>
+      {store.words && <DictionaryContainer words={store.words} store={store} />}
+      <Form store={store} />
+    </StyledDiv>
+  );
+});
 
 export default App;
